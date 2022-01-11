@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Builder
 public class ApplicationUser implements UserDetails {
 
-  private final UUID id;
+  private final UUID userId;
   private final Set<? extends GrantedAuthority> grantedAuthorities;
   private final String password;
   private final String username;
@@ -20,7 +20,7 @@ public class ApplicationUser implements UserDetails {
   private final boolean isEnabled;
 
   public ApplicationUser(
-      UUID id,
+      UUID userId,
       Set<? extends GrantedAuthority> grantedAuthorities,
       String password,
       String username,
@@ -28,7 +28,7 @@ public class ApplicationUser implements UserDetails {
       boolean isAccountNonLocked,
       boolean isCredentialsNonExpired,
       boolean isEnabled) {
-    this.id = id;
+    this.userId = userId;
     this.grantedAuthorities = grantedAuthorities;
     this.password = password;
     this.username = username;
@@ -38,8 +38,8 @@ public class ApplicationUser implements UserDetails {
     this.isEnabled = isEnabled;
   }
 
-  public UUID getId() {
-    return id;
+  public UUID getUserId() {
+    return userId;
   }
 
   @Override

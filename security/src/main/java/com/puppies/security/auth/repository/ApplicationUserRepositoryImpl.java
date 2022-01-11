@@ -4,7 +4,6 @@ import com.puppies.security.auth.entity.UserSecurityEntity;
 import com.puppies.security.auth.mapper.ApplicationUserMapper;
 import com.puppies.security.auth.model.ApplicationUser;
 import java.util.Optional;
-import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -23,7 +22,6 @@ public class ApplicationUserRepositoryImpl implements ApplicationUserRepository 
 
   @Override
   public UserSecurityEntity create(UserSecurityEntity userSecurityEntity) {
-    userSecurityEntity.setUserId(UUID.randomUUID());
     return applicationUserJpaRepository.save(userSecurityEntity);
   }
 

@@ -4,6 +4,8 @@ import java.util.UUID;
 
 public interface UserSecurityService {
 
-  UUID getId();
+  String encodePassword(String password);
+
+  UUID getUserId();
 
 }

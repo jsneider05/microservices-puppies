@@ -33,4 +33,8 @@ public class User {
   public void setUserRoles(Set<UserRole> userRoles) {
     this.userRoles = userRoles;
   }
+
+  public void setId(UUID id) {
+    this.id = id;
+  }
 }

@@ -15,7 +15,7 @@ public class ApplicationUserMapper {
 
   public Optional<ApplicationUser> mapToApplicationUser(UserSecurityEntity user) {
     return Optional.of(new ApplicationUser(
-        user.getId(),
+        user.getUserId(),
         getPermissions(user.getRoles()),
         user.getPassword(),
         user.getUserName(),

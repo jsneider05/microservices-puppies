@@ -3,9 +3,10 @@ package com.puppies.user.domain.service;
 import com.puppies.security.auth.model.UserRoleEnum;
 import com.puppies.user.domain.model.User;
 import com.puppies.user.domain.model.UserRole;
-import com.puppies.user.domain.port.UserRoleDao;
-import com.puppies.user.domain.port.UserDao;
 import com.puppies.user.domain.port.UserRepository;
+import com.puppies.user.domain.port.UserSecurityRoleDao;
+import com.puppies.user.domain.port.UserSecurityDao;
+import com.puppies.user.domain.port.UserSecurityRepository;
 import com.puppies.user.domain.validator.UserValidator;
 import java.util.Set;
 import java.util.UUID;
@@ -19,23 +20,28 @@ import org.springframework.stereotype.Service;
 @Service
 public class CreateUserService {
 
+  private final UserSecurityRepository userSecurityRepository;
+  private final UserSecurityDao userSecurityDao;
+  private final UserSecurityRoleDao userSecurityRoleDao;
   private final UserRepository userRepository;
-  private final UserDao userDao;
-  private final UserRoleDao userRoleDao;
 
   public UUID execute(User user) {
 
-    UserValidator.validEmail(userDao.existsByEmail(user.getEmail()))
+    UserValidator.validEmail(userSecurityDao.existsByEmail(user.getEmail()))
         .validate(user)
         .throwIfInvalid();
 
-    Set<UserRole> roles = userRoleDao.getAll().stream()
+    UUID userIdCreated = userRepository.create(user);
+
+    Set<UserRole> roles = userSecurityRoleDao.getAll().stream()
         .filter(userRole -> userRole.getName().equals(UserRoleEnum.CUSTOMER.name()))
         .collect(Collectors.toSet());
 
     user.setUserRoles(roles);
+    user.setId(userIdCreated);
+    userSecurityRepository.create(user);
 
-    return userRepository.create(user);
+    return userIdCreated;
   }
 
 }

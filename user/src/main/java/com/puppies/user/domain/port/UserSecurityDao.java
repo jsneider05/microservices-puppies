@@ -1,6 +1,6 @@
 package com.puppies.user.domain.port;
 
-public interface UserDao {
+public interface UserSecurityDao {
 
   Boolean existsByEmail(String email);
 
