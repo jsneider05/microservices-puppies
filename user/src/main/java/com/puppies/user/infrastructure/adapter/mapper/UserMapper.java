@@ -1,7 +1,7 @@
 package com.puppies.user.infrastructure.adapter.mapper;
 
 import com.puppies.security.auth.entity.RoleEntity;
-import com.puppies.security.auth.entity.UserEntity;
+import com.puppies.security.auth.entity.UserSecurityEntity;
 import com.puppies.user.domain.model.User;
 import com.puppies.user.domain.model.UserRole;
 import java.util.Set;
@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserMapper {
 
-  public UserEntity toUserEntity(User user){
-    return UserEntity.builder()
+  public UserSecurityEntity toUserEntity(User user){
+    return UserSecurityEntity.builder()
         .email(user.getEmail())
         .enabled(Boolean.TRUE)
         .userName(user.getUsername())

@@ -1,6 +1,6 @@
 package com.puppies.user.infrastructure.entity;
 
-import com.puppies.security.auth.entity.UserEntity;
+import com.puppies.security.auth.entity.UserSecurityEntity;
 import java.time.LocalDate;
 import java.util.UUID;
 import javax.persistence.CascadeType;
@@ -46,12 +46,12 @@ public class CustomerEntity {
 
   @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(
-      name = "user_id",
+      name = "user_security_id",
       referencedColumnName = "id",
       foreignKey = @ForeignKey(
-          name = "customer_user_user_id_fk"
+          name = "customer_user_security_user_security_id_fk"
       )
   )
-  private UserEntity user;
+  private UserSecurityEntity userSecurity;
 
 }

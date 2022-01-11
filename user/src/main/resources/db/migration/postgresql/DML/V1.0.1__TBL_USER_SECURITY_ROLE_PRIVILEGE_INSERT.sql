@@ -1,5 +1,5 @@
-INSERT INTO public.user (id, email, enabled, password, user_name) VALUES ('023fcfd8-1671-4d8c-8489-ddba3af93173', 'joan@gmail.com', true, '$2y$12$V2LZGXmlHsR95aZMG5DReeP5Ro1aPY0ZfL38zvnSf/gUaKi4XI9/u', 'Joan');
-INSERT INTO public.user (id, email, enabled, password, user_name) VALUES ('b6bd239d-01e2-4659-a425-7e086f288279', 'angie@gmail.com', true, '$2y$12$V2LZGXmlHsR95aZMG5DReeP5Ro1aPY0ZfL38zvnSf/gUaKi4XI9/u', 'Angie');
+INSERT INTO public.user_security (id, user_id, email, enabled, password, user_name) VALUES ('023fcfd8-1671-4d8c-8489-ddba3af93173', 'b2ede6b4-72d5-4f3a-906c-6dd43fe67d02', 'joan@gmail.com', true, '$2y$12$V2LZGXmlHsR95aZMG5DReeP5Ro1aPY0ZfL38zvnSf/gUaKi4XI9/u', 'Joan');
+INSERT INTO public.user_security (id, user_id, email, enabled, password, user_name) VALUES ('b6bd239d-01e2-4659-a425-7e086f288279', 'de36a54a-d693-4ca4-9f8e-6d0cb608df80', 'angie@gmail.com', true, '$2y$12$V2LZGXmlHsR95aZMG5DReeP5Ro1aPY0ZfL38zvnSf/gUaKi4XI9/u', 'Angie');
 INSERT INTO public.role (id, name) VALUES ('d96d15e3-3d41-4780-a87f-37888e04888e', 'ADMIN');
 INSERT INTO public.role (id, name) VALUES ('70e50793-eee8-421d-befc-71ead4e3f152', 'CUSTOMER');
 INSERT INTO public.privilege (id, name) VALUES ('f026ad08-43e4-4216-a565-9e63cf97354a', 'post:write');
@@ -7,13 +7,13 @@ INSERT INTO public.privilege (id, name) VALUES ('953efc83-2ff9-4945-88a0-41dace1
 INSERT INTO public.privilege (id, name) VALUES ('2200766e-da3c-4591-94cb-8aaa59c0aabd', 'post:delete');
 INSERT INTO public.privilege (id, name) VALUES ('b049454c-0ba3-4714-b1b8-a0c6585d6926', 'post:update');
 INSERT INTO public.privilege (id, name) VALUES ('c990c438-1dd6-4555-9814-cf856b5b7164', 'post:archive');
-INSERT INTO public.user_role (user_id, role_id) VALUES ('023fcfd8-1671-4d8c-8489-ddba3af93173', 'd96d15e3-3d41-4780-a87f-37888e04888e');
+INSERT INTO public.user_security_role (user_security_id, role_id) VALUES ('023fcfd8-1671-4d8c-8489-ddba3af93173', 'd96d15e3-3d41-4780-a87f-37888e04888e');
 INSERT INTO public.role_privilege (role_id, privilege_id) VALUES ('d96d15e3-3d41-4780-a87f-37888e04888e', 'f026ad08-43e4-4216-a565-9e63cf97354a');
 INSERT INTO public.role_privilege (role_id, privilege_id) VALUES ('d96d15e3-3d41-4780-a87f-37888e04888e', '953efc83-2ff9-4945-88a0-41dace16f805');
 INSERT INTO public.role_privilege (role_id, privilege_id) VALUES ('d96d15e3-3d41-4780-a87f-37888e04888e', '2200766e-da3c-4591-94cb-8aaa59c0aabd');
 INSERT INTO public.role_privilege (role_id, privilege_id) VALUES ('d96d15e3-3d41-4780-a87f-37888e04888e', 'b049454c-0ba3-4714-b1b8-a0c6585d6926');
 INSERT INTO public.role_privilege (role_id, privilege_id) VALUES ('d96d15e3-3d41-4780-a87f-37888e04888e', 'c990c438-1dd6-4555-9814-cf856b5b7164');
-INSERT INTO public.user_role (user_id, role_id) VALUES ('b6bd239d-01e2-4659-a425-7e086f288279', '70e50793-eee8-421d-befc-71ead4e3f152');
+INSERT INTO public.user_security_role (user_security_id, role_id) VALUES ('b6bd239d-01e2-4659-a425-7e086f288279', '70e50793-eee8-421d-befc-71ead4e3f152');
 INSERT INTO public.role_privilege (role_id, privilege_id) VALUES ('70e50793-eee8-421d-befc-71ead4e3f152', 'f026ad08-43e4-4216-a565-9e63cf97354a');
 INSERT INTO public.role_privilege (role_id, privilege_id) VALUES ('70e50793-eee8-421d-befc-71ead4e3f152', '953efc83-2ff9-4945-88a0-41dace16f805');
 INSERT INTO public.role_privilege (role_id, privilege_id) VALUES ('70e50793-eee8-421d-befc-71ead4e3f152', 'b049454c-0ba3-4714-b1b8-a0c6585d6926');

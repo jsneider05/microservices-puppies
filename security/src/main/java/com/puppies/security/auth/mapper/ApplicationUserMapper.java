@@ -2,7 +2,7 @@ package com.puppies.security.auth.mapper;
 
 import com.puppies.security.auth.entity.PrivilegeEntity;
 import com.puppies.security.auth.entity.RoleEntity;
-import com.puppies.security.auth.entity.UserEntity;
+import com.puppies.security.auth.entity.UserSecurityEntity;
 import com.puppies.security.auth.model.ApplicationUser;
 import java.util.Optional;
 import java.util.Set;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ApplicationUserMapper {
 
-  public Optional<ApplicationUser> mapToApplicationUser(UserEntity user) {
+  public Optional<ApplicationUser> mapToApplicationUser(UserSecurityEntity user) {
     return Optional.of(new ApplicationUser(
         user.getId(),
         getPermissions(user.getRoles()),

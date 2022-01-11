@@ -1,6 +1,6 @@
 package com.puppies.security.auth.repository;
 
-import com.puppies.security.auth.entity.UserEntity;
+import com.puppies.security.auth.entity.UserSecurityEntity;
 import com.puppies.security.auth.mapper.ApplicationUserMapper;
 import com.puppies.security.auth.model.ApplicationUser;
 import java.util.Optional;
@@ -22,8 +22,9 @@ public class ApplicationUserRepositoryImpl implements ApplicationUserRepository 
   }
 
   @Override
-  public UserEntity create(UserEntity userEntity) {
-    return applicationUserJpaRepository.save(userEntity);
+  public UserSecurityEntity create(UserSecurityEntity userSecurityEntity) {
+    userSecurityEntity.setUserId(UUID.randomUUID());
+    return applicationUserJpaRepository.save(userSecurityEntity);
   }
 
   @Override

@@ -1,6 +1,6 @@
 package com.puppies.user.infrastructure.adapter.repository;
 
-import com.puppies.security.auth.entity.UserEntity;
+import com.puppies.security.auth.entity.UserSecurityEntity;
 import com.puppies.security.auth.repository.ApplicationUserRepository;
 import com.puppies.user.domain.model.User;
 import com.puppies.user.domain.port.UserRepository;
@@ -24,7 +24,7 @@ public class UserRepositoryImpl implements UserRepository {
 
   @Override
   public UUID create(User user) {
-    UserEntity userCreated = applicationUserRepository.create(
+    UserSecurityEntity userCreated = applicationUserRepository.create(
         userMapper.toUserEntity(user));
     return customerJpaRepository.save(customerMapper.toEntity(userCreated, user)).getId();
   }

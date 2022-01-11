@@ -27,21 +27,26 @@ import org.hibernate.annotations.Type;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "UserEntity")
+@Entity(name = "UserSecurityEntity")
 @Table(
-    name = "user",
+    name = "user_security",
     uniqueConstraints = {
-        @UniqueConstraint(name = "user_user_name_unique", columnNames = "user_name"),
-        @UniqueConstraint(name = "user_email_unique", columnNames = "email")
+        @UniqueConstraint(name = "user_security_user_name_unique", columnNames = "user_name"),
+        @UniqueConstraint(name = "user_security_email_unique", columnNames = "email"),
+        @UniqueConstraint(name = "user_security_user_id_unique", columnNames = "user_id")
     }
 )
-public class UserEntity {
+public class UserSecurityEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "id", nullable = false, updatable = false)
   @Type(type = "uuid-char")
   private UUID id;
+
+  @Column(name = "user_id", nullable = false, updatable = false)
+  @Type(type = "uuid-char")
+  private UUID userId;
 
   @Column(name = "user_name", nullable = false)
   private String userName;
@@ -57,14 +62,14 @@ public class UserEntity {
 
   @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
   @JoinTable(
-      name = "user_role",
+      name = "user_security_role",
       joinColumns = @JoinColumn(
-          name = "user_id", referencedColumnName = "id",
-          foreignKey = @ForeignKey(name = "user_role_user_id_fk")
+          name = "user_security_id", referencedColumnName = "id",
+          foreignKey = @ForeignKey(name = "user_security_role_user_security_id_fk")
       ),
       inverseJoinColumns = @JoinColumn(
           name = "role_id", referencedColumnName = "id",
-          foreignKey = @ForeignKey(name = "user_role_role_id_fk")
+          foreignKey = @ForeignKey(name = "user_security_role_role_id_fk")
       )
   )
   private Set<RoleEntity> roles;
