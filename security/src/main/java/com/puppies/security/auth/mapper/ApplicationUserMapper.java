@@ -14,7 +14,9 @@ import org.springframework.stereotype.Component;
 public class ApplicationUserMapper {
 
   public Optional<ApplicationUser> mapToApplicationUser(UserEntity user) {
-    return Optional.of(new ApplicationUser(getPermissions(user.getRoles()),
+    return Optional.of(new ApplicationUser(
+        user.getId(),
+        getPermissions(user.getRoles()),
         user.getPassword(),
         user.getUserName(),
         true,

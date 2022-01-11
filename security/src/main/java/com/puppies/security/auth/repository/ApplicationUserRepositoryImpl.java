@@ -22,8 +22,8 @@ public class ApplicationUserRepositoryImpl implements ApplicationUserRepository 
   }
 
   @Override
-  public UUID create(UserEntity userEntity) {
-    return applicationUserJpaRepository.save(userEntity).getId();
+  public UserEntity create(UserEntity userEntity) {
+    return applicationUserJpaRepository.save(userEntity);
   }
 
   @Override

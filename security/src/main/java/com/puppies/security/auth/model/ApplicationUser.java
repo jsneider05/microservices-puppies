@@ -2,6 +2,7 @@ package com.puppies.security.auth.model;
 
 import java.util.Collection;
 import java.util.Set;
+import java.util.UUID;
 import lombok.Builder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Builder
 public class ApplicationUser implements UserDetails {
 
+  private final UUID id;
   private final Set<? extends GrantedAuthority> grantedAuthorities;
   private final String password;
   private final String username;
@@ -17,13 +19,16 @@ public class ApplicationUser implements UserDetails {
   private final boolean isCredentialsNonExpired;
   private final boolean isEnabled;
 
-  public ApplicationUser(Set<? extends GrantedAuthority> grantedAuthorities,
+  public ApplicationUser(
+      UUID id,
+      Set<? extends GrantedAuthority> grantedAuthorities,
       String password,
       String username,
       boolean isAccountNonExpired,
       boolean isAccountNonLocked,
       boolean isCredentialsNonExpired,
       boolean isEnabled) {
+    this.id = id;
     this.grantedAuthorities = grantedAuthorities;
     this.password = password;
     this.username = username;
@@ -31,6 +36,10 @@ public class ApplicationUser implements UserDetails {
     this.isAccountNonLocked = isAccountNonLocked;
     this.isCredentialsNonExpired = isCredentialsNonExpired;
     this.isEnabled = isEnabled;
+  }
+
+  public UUID getId() {
+    return id;
   }
 
   @Override

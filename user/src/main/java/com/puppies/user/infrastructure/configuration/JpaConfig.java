@@ -10,7 +10,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
     "com.puppies.security.auth.entity"
 })
 @EnableJpaRepositories(basePackages = {
-    "com.puppies.security.auth.repository"
+    "com.puppies.security.auth.repository",
+    "com.puppies.user.infrastructure.adapter"
 })
 public class JpaConfig {
 

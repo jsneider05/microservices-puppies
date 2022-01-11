@@ -1,8 +1,11 @@
 package com.puppies.user.infrastructure.adapter.repository;
 
+import com.puppies.security.auth.entity.UserEntity;
 import com.puppies.security.auth.repository.ApplicationUserRepository;
 import com.puppies.user.domain.model.User;
 import com.puppies.user.domain.port.UserRepository;
+import com.puppies.user.infrastructure.adapter.CustomerJpaRepository;
+import com.puppies.user.infrastructure.adapter.mapper.CustomerMapper;
 import com.puppies.user.infrastructure.adapter.mapper.UserMapper;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
@@ -15,12 +18,14 @@ import org.springframework.stereotype.Component;
 public class UserRepositoryImpl implements UserRepository {
 
   private final ApplicationUserRepository applicationUserRepository;
-  private final UserMapper mapper;
+  private final UserMapper userMapper;
+  private final CustomerJpaRepository customerJpaRepository;
+  private final CustomerMapper customerMapper;
 
   @Override
   public UUID create(User user) {
-    return applicationUserRepository.create(
-        mapper.toUserEntity(user)
-    );
+    UserEntity userCreated = applicationUserRepository.create(
+        userMapper.toUserEntity(user));
+    return customerJpaRepository.save(customerMapper.toEntity(userCreated, user)).getId();
   }
 }

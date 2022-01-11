@@ -9,7 +9,7 @@ public interface ApplicationUserRepository {
 
     Optional<ApplicationUser> selectApplicationUserByUsername (String username);
 
-    UUID create(UserEntity userEntity);
+    UserEntity create(UserEntity userEntity);
 
     Boolean existByEmail(String email);
 
