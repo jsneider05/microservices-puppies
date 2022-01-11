@@ -20,6 +20,8 @@ import javax.validation.Path.Node;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -118,5 +120,21 @@ public class ErrorHandler extends ResponseEntityExceptionHandler {
           .map(Node::toString)
           .reduce((methodName, parameterName) -> parameterName)
           .orElse("The parameter");
+
+  @ExceptionHandler(value = {BadCredentialsException.class})
+  public ResponseEntity<Error> handleBadCredentialsException(BadCredentialsException ex){
+    HttpStatus httpStatus = HttpStatus.UNAUTHORIZED;
+    Error error = new Error(LocalDateTime.now(), httpStatus.value(),
+        httpStatus.getReasonPhrase(), List.of(ex.getMessage()));
+    return new ResponseEntity<>(error, httpStatus);
+  }
+
+  @ExceptionHandler(value = {AccessDeniedException.class})
+  public ResponseEntity<Error> handleAccessDeniedException(AccessDeniedException ex){
+    HttpStatus httpStatus = HttpStatus.UNAUTHORIZED;
+    Error error = new Error(LocalDateTime.now(), httpStatus.value(),
+        httpStatus.getReasonPhrase(), List.of(ex.getMessage()));
+    return new ResponseEntity<>(error, httpStatus);
+  }
 
 }

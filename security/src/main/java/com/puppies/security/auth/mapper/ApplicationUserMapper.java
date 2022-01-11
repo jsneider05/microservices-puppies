@@ -43,4 +43,16 @@ public class ApplicationUserMapper {
         .collect(Collectors.toSet());
   }
 
+  public Optional<ApplicationUser> mapToApplicationMainUserData(UserSecurityEntity user) {
+    return Optional.of(new ApplicationUser(
+        user.getUserId(),
+        null,
+        null,
+        user.getUserName(),
+        true,
+        true,
+        true,
+        user.isEnabled()));
+  }
+
 }

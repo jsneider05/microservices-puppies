@@ -1,6 +1,7 @@
 package com.puppies.security.jwt;
 
 import com.google.common.base.Strings;
+import com.puppies.security.auth.service.ApplicationUserService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwtException;
@@ -19,17 +20,21 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 public class JwtTokenVerifier extends OncePerRequestFilter {
 
     private final JwtConfig jwtConfig;
     private final SecretKey secretKey;
+    private final ApplicationUserService applicationUserService;
 
     public JwtTokenVerifier(JwtConfig jwtConfig,
-                            SecretKey secretKey) {
+        SecretKey secretKey,
+        ApplicationUserService applicationUserService) {
         this.jwtConfig = jwtConfig;
         this.secretKey = secretKey;
+        this.applicationUserService = applicationUserService;
     }
 
     @Override
@@ -63,8 +68,9 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
                     .map(m -> new SimpleGrantedAuthority(m.get("authority")))
                     .collect(Collectors.toSet());
 
+            UserDetails user = applicationUserService.loadMainUserDataByUsername(username);
             Authentication authentication = new UsernamePasswordAuthenticationToken(
-                    username,
+                    user,
                     null,
                     simpleGrantedAuthorities
             );

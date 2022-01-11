@@ -1,7 +1,7 @@
-package com.puppies.user.infrastructure.adapter.repository;
+package com.puppies.user.infrastructure.adapter.dao;
 
 import com.puppies.user.domain.model.User;
-import com.puppies.user.domain.port.repository.UserRepository;
+import com.puppies.user.domain.port.dao.UserDao;
 import com.puppies.user.infrastructure.adapter.UserJpaRepository;
 import com.puppies.user.infrastructure.adapter.mapper.UserMapper;
 import java.util.UUID;
@@ -12,13 +12,13 @@ import org.springframework.stereotype.Repository;
 @Slf4j
 @RequiredArgsConstructor
 @Repository
-public class UserRepositoryImpl implements UserRepository {
+public class UserDaoImpl implements UserDao {
 
   private final UserJpaRepository jpaRepository;
   private final UserMapper mapper;
 
   @Override
-  public UUID create(User user) {
-    return jpaRepository.save(mapper.toEntity(user)).getId();
+  public User getUserDetailsById(UUID userId) {
+    return mapper.toUser(jpaRepository.selectUserDataById(userId.toString()));
   }
 }

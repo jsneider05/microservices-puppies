@@ -15,8 +15,14 @@ public class ApplicationUserRepositoryImpl implements ApplicationUserRepository 
   private final ApplicationUserMapper applicationUserMapper;
 
   @Override
-  public Optional<ApplicationUser> selectApplicationUserByUsername(String username) {
+  public Optional<ApplicationUser> selectApplicationUserRolePrivilegesByUsername(String username) {
     return this.applicationUserMapper.mapToApplicationUser(
+        this.applicationUserJpaRepository.selectApplicationUserByUsername(username));
+  }
+
+  @Override
+  public Optional<ApplicationUser> selectApplicationMainUserDataByUsername(String username) {
+    return this.applicationUserMapper.mapToApplicationMainUserData(
         this.applicationUserJpaRepository.selectApplicationUserByUsername(username));
   }
 

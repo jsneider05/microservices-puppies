@@ -6,7 +6,9 @@ import java.util.Optional;
 
 public interface ApplicationUserRepository {
 
-    Optional<ApplicationUser> selectApplicationUserByUsername (String username);
+    Optional<ApplicationUser> selectApplicationUserRolePrivilegesByUsername(String username);
+
+    Optional<ApplicationUser> selectApplicationMainUserDataByUsername(String username);
 
     UserSecurityEntity create(UserSecurityEntity userSecurityEntity);
 

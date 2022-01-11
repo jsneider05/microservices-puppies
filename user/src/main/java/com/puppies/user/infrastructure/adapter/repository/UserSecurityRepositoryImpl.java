@@ -2,7 +2,7 @@ package com.puppies.user.infrastructure.adapter.repository;
 
 import com.puppies.security.auth.repository.ApplicationUserRepository;
 import com.puppies.user.domain.model.User;
-import com.puppies.user.domain.port.UserSecurityRepository;
+import com.puppies.user.domain.port.repository.UserSecurityRepository;
 import com.puppies.user.infrastructure.adapter.mapper.UserSecurityMapper;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;

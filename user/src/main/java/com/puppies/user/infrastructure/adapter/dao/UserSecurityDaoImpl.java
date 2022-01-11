@@ -1,7 +1,7 @@
 package com.puppies.user.infrastructure.adapter.dao;
 
 import com.puppies.security.auth.repository.ApplicationUserRepository;
-import com.puppies.user.domain.port.UserSecurityDao;
+import com.puppies.user.domain.port.dao.UserSecurityDao;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

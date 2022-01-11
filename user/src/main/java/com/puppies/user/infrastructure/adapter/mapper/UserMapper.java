@@ -15,4 +15,15 @@ public class UserMapper {
         .build();
   }
 
+  public User toUser(UserDetailDto userDetailDto) {
+    return User.builder()
+        .id(userDetailDto.getId())
+        .firstName(userDetailDto.getFirstName())
+        .lastName(userDetailDto.getLastName())
+        .username(userDetailDto.getUsername())
+        .email(userDetailDto.getEmail())
+        .dob(userDetailDto.getDob())
+        .build();
+  }
+
 }

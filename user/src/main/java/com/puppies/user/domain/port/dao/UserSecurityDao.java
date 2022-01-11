@@ -1,4 +1,4 @@
-package com.puppies.user.domain.port;
+package com.puppies.user.domain.port.dao;
 
 public interface UserSecurityDao {
 
