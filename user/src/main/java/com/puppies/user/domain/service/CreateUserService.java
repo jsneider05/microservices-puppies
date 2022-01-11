@@ -1,5 +1,6 @@
 package com.puppies.user.domain.service;
 
+import com.puppies.security.auth.model.UserRoleEnum;
 import com.puppies.user.domain.model.User;
 import com.puppies.user.domain.model.UserRole;
 import com.puppies.user.domain.port.UserRoleDao;
@@ -24,10 +25,12 @@ public class CreateUserService {
 
   public UUID execute(User user) {
 
-    UserValidator.validEmail(userDao.existsByEmail(user.getEmail())).validate(user);
+    UserValidator.validEmail(userDao.existsByEmail(user.getEmail()))
+        .validate(user)
+        .throwIfInvalid();
 
     Set<UserRole> roles = userRoleDao.getAll().stream()
-        .filter(userRole -> userRole.equals(""))
+        .filter(userRole -> userRole.getName().equals(UserRoleEnum.CUSTOMER.name()))
         .collect(Collectors.toSet());
 
     user.setUserRoles(roles);

@@ -55,7 +55,7 @@ public class UserEntity {
   @Column(name = "enabled", nullable = false)
   private boolean enabled;
 
-  @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+  @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
   @JoinTable(
       name = "user_role",
       joinColumns = @JoinColumn(

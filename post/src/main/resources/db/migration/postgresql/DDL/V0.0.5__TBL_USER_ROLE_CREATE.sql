@@ -5,7 +5,7 @@ create table if not exists public.user_role
     constraint user_role_pkey
         primary key (user_id, role_id),
     constraint user_role_role_id_fk
-        foreign key (role_id) references public.userRole,
+        foreign key (role_id) references public.role,
     constraint user_role_user_id_fk
         foreign key (user_id) references public."user"
 );

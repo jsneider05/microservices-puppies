@@ -7,8 +7,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -31,18 +29,14 @@ import org.hibernate.annotations.Type;
 public class RoleEntity {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "id", nullable = false, updatable = false)
   @Type(type="uuid-char")
   private UUID id;
 
-  @Column(name = "name", nullable = false, length = 255)
+  @Column(name = "name", nullable = false)
   private String name;
 
-  @ManyToMany(mappedBy = "roles")
-  private Set<UserEntity> users;
-
-  @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+  @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
   @JoinTable(
       name = "role_privilege",
       joinColumns = @JoinColumn(

@@ -7,5 +7,5 @@ create table if not exists public.role_privilege
     constraint role_privilege_privilege_id_fk
         foreign key (privilege_id) references public.privilege,
     constraint role_privilege_role_id_fk
-        foreign key (role_id) references public.userRole
+        foreign key (role_id) references public.role
 );

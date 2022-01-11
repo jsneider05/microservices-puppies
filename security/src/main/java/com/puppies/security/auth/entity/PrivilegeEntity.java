@@ -1,13 +1,9 @@
 package com.puppies.security.auth.entity;
 
-import java.util.Set;
 import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,15 +22,11 @@ import org.hibernate.annotations.Type;
 public class PrivilegeEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false, updatable = false)
     @Type(type="uuid-char")
     private UUID id;
 
     @Column(name = "name", nullable = false)
     private String name;
-
-    @ManyToMany(mappedBy = "privileges")
-    private Set<RoleEntity> roles;
 
 }

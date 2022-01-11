@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 @RequiredArgsConstructor
 @Repository
-public class RoleRepositoryImpl implements RoleRepository{
+public class RoleRepositoryImpl implements RoleRepository {
 
   private final RoleJpaRepository jpaRepository;
   private final RoleMapper mapper;

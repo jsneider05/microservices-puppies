@@ -1,4 +1,4 @@
-package com.puppies.user.infrastructure.adapter.Repository;
+package com.puppies.user.infrastructure.adapter.repository;
 
 import com.puppies.security.auth.repository.ApplicationUserRepository;
 import com.puppies.user.domain.model.User;
