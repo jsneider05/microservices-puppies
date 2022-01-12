@@ -8,21 +8,27 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ApplicationUserMapper {
 
-  public Optional<ApplicationUser> mapToApplicationUser(UserSecurityEntity user) {
-    return Optional.of(new ApplicationUser(
-        user.getUserId(),
-        getPermissions(user.getRoles()),
-        user.getPassword(),
-        user.getUserName(),
-        true,
-        true,
-        true,
-        user.isEnabled()));
+  private static final String USER_NOT_FOUND = "User not found";
+
+  public ApplicationUser mapToApplicationUser(UserSecurityEntity userEntity) {
+    return Optional.ofNullable(userEntity)
+        .map(user ->
+            new ApplicationUser(
+                user.getUserId(),
+                getPermissions(user.getRoles()),
+                user.getPassword(),
+                user.getUserName(),
+                true,
+                true,
+                true,
+                user.isEnabled()))
+        .orElseThrow(() -> new UsernameNotFoundException(USER_NOT_FOUND));
   }
 
   private Set<SimpleGrantedAuthority> getPermissions(Set<RoleEntity> roleEntities) {
@@ -43,16 +49,18 @@ public class ApplicationUserMapper {
         .collect(Collectors.toSet());
   }
 
-  public Optional<ApplicationUser> mapToApplicationMainUserData(UserSecurityEntity user) {
-    return Optional.of(new ApplicationUser(
-        user.getUserId(),
-        null,
-        null,
-        user.getUserName(),
-        true,
-        true,
-        true,
-        user.isEnabled()));
+  public ApplicationUser mapToApplicationMainUserData(UserSecurityEntity userEntity) {
+    return Optional.ofNullable(userEntity)
+        .map(user -> new ApplicationUser(
+            user.getUserId(),
+            null,
+            null,
+            user.getUserName(),
+            true,
+            true,
+            true,
+            user.isEnabled()))
+        .orElseThrow(() -> new UsernameNotFoundException(USER_NOT_FOUND));
   }
 
 }

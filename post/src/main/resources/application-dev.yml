@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: ${PUPPIES-SERVICES_DATABASE_URL:jdbc:postgresql://localhost:5434/puppies}
-    username: ${PUPPIES-SERVICES_DATABASE_USERNAME:postgres}
-    password: ${PUPPIES-SERVICES_DATABASE_PASSWORD:password}
+    url: ${PUPPIES_POST_DATABASE_URL:jdbc:postgresql://localhost:5434/puppies}
+    username: ${PUPPIES_POST_DATABASE_USERNAME:postgres}
+    password: ${PUPPIES_POST_DATABASE_PASSWORD:password}
     driver-class-name: org.postgresql.Driver
   jpa:
     generate-ddl: true
@@ -15,11 +15,11 @@ spring:
         format_sql: true
         default_schema: public
   flyway:
-    enabled: true
-    url: ${PUPPIES-SERVICES_DATABASE_URL:jdbc:postgresql://localhost:5434/puppies}
+    enabled: false
+    url: ${PUPPIES_POST_DATABASE_URL:jdbc:postgresql://localhost:5434/puppies}
     schemas: puppies-post-migration
-    user: ${PUPPIES-SERVICES_DATABASE_USERNAME:postgres}
-    password: ${PUPPIES-SERVICES_DATABASE_PASSWORD:password}
+    user: ${PUPPIES_POST_DATABASE_USERNAME:postgres}
+    password: ${PUPPIES_POST_DATABASE_PASSWORD:password}
     locations: classpath:db/migration/postgresql
     table: puppies_post_schema_version
     out-of-order: true
@@ -30,6 +30,11 @@ application:
     secretKey: securesecuresecuresecuresecuresecuresecuresecure
     tokenPrefix: Bearer
     tokenExpirationAfterDays: 10
+
+
+  cloud:
+    client:
+      bucket-name: ${PUPPIES_POST_BUCKET_NAME:bucket_name}
 
 logging:
   pattern:

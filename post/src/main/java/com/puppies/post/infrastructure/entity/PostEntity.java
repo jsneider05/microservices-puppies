@@ -1,18 +1,14 @@
 package com.puppies.post.infrastructure.entity;
 
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -37,21 +33,21 @@ public class PostEntity {
   @Type(type = "uuid-char")
   private UUID id;
 
-  @Column(name = "image_key", nullable = false)
+  @Column(name = "user_id", nullable = false, updatable = false)
+  @Type(type = "uuid-char")
+  private UUID userId;
+
+  @Column(name = "image_key", columnDefinition = "TEXT")
   private String imageKey;
 
-  @Column(name = "caption", nullable = false)
+  @Column(name = "caption", columnDefinition = "TEXT")
   private String caption;
 
   @Column(name = "created_at", nullable = false, columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
   private LocalDateTime createdAt;
 
-  @Column(name = "updated_at", nullable = false, columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+  @Column(name = "updated_at", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
   private LocalDateTime updatedAt;
-
-  @Column(name = "customer_id", nullable = false, updatable = false)
-  @Type(type = "uuid-char")
-  private UUID customerId;
 
   @OneToMany(
       cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
