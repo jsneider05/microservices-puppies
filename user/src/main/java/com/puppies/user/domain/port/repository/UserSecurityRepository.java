@@ -5,6 +5,6 @@ import java.util.UUID;
 
 public interface UserSecurityRepository {
 
-  UUID create(User user);
+  UUID save(User user);
 
 }

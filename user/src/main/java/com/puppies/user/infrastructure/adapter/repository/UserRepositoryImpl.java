@@ -18,7 +18,7 @@ public class UserRepositoryImpl implements UserRepository {
   private final UserMapper mapper;
 
   @Override
-  public UUID create(User user) {
+  public UUID save(User user) {
     return jpaRepository.save(mapper.toEntity(user)).getId();
   }
 }

@@ -31,7 +31,7 @@ public class CreateUserService {
         .validate(user)
         .throwIfInvalid();
 
-    UUID userIdCreated = userRepository.create(user);
+    UUID userIdCreated = userRepository.save(user);
 
     Set<UserRole> roles = userSecurityRoleDao.getAll().stream()
         .filter(userRole -> userRole.getName().equals(UserRoleEnum.CUSTOMER.name()))
@@ -39,7 +39,7 @@ public class CreateUserService {
 
     user.setUserRoles(roles);
     user.setId(userIdCreated);
-    userSecurityRepository.create(user);
+    userSecurityRepository.save(user);
 
     return userIdCreated;
   }

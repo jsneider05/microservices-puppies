@@ -18,7 +18,7 @@ public class UserSecurityRepositoryImpl implements UserSecurityRepository {
   private final UserSecurityMapper userSecurityMapper;
 
   @Override
-  public UUID create(User user) {
+  public UUID save(User user) {
     return applicationUserRepository.create(
         userSecurityMapper.toEntity(user)).getUserId();
   }
