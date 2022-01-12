@@ -84,15 +84,6 @@
         <artifactId>spring-boot-maven-plugin</artifactId>
         <configuration>
           <mainClass>${bootstrapClass}</mainClass>
-          <finalName>${project.name}-${project.parent.version}</finalName>
-          <classifier>${java.version}</classifier>
-          <layout>JAR</layout>
-          <excludes>
-            <exclude>
-              <groupId>org.projectlombok</groupId>
-              <artifactId>lombok</artifactId>
-            </exclude>
-          </excludes>
         </configuration>
       </plugin>
     </plugins>

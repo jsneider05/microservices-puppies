@@ -34,7 +34,7 @@ git clone https://github.com/jsneider05/microservices-puppies.git
 
 ## Run the project
 
-1) Clean and install dependencies
+1) Clean, install dependencies and run the tests
 
 ```bash
 cd microservices-puppies

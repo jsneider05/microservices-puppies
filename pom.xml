@@ -25,6 +25,8 @@
     <spring.boot.maven.plugin.version>2.6.2</spring.boot.maven.plugin.version>
     <spring.boot.dependencies.version>2.6.2</spring.boot.dependencies.version>
     <maven.compiler.plugin.version>3.8.0</maven.compiler.plugin.version>
+    <maven.test.skip>false</maven.test.skip>
+    <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
   </properties>
 
   <dependencyManagement>
@@ -61,6 +63,17 @@
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-maven-plugin</artifactId>
           <version>${spring.boot.maven.plugin.version}</version>
+          <configuration>
+            <finalName>${project.name}-${project.parent.version}</finalName>
+            <classifier>${java.version}</classifier>
+            <layout>JAR</layout>
+            <excludes>
+              <exclude>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+              </exclude>
+            </excludes>
+          </configuration>
           <executions>
             <execution>
               <goals>
@@ -81,6 +94,12 @@
           <source>${maven.compiler.source}</source>
           <target>${maven.compiler.target}</target>
         </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${maven-surefire-plugin.version}</version>
       </plugin>
     </plugins>
   </build>
