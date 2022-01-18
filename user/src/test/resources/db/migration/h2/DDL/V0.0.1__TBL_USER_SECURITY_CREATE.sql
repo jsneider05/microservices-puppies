@@ -1,4 +1,4 @@
-create table if not exists public."user_security"
+create table if not exists public.user_security
 (
     id        varchar(255) not null,
     user_id   varchar(255) not null,
